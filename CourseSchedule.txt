@@ -1,0 +1,54 @@
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        
+        ArrayList<ArrayList<Integer>> graph=new ArrayList<>();
+        int v = numCourses;
+        
+        for(int i=0;i<v;i++){
+            graph.add(new ArrayList<>());
+        }
+        
+        for(int i=0;i<prerequisites.length;i++){
+            int a = prerequisites[i][0]-1;
+             int b = prerequisites[i][1]-1;
+            
+            graph.get(b).add(a);
+        }
+        
+        boolean[] vis=new boolean[v];
+      ArrayDeque<Integer> q=new ArrayDeque<>();
+        int indegree[]=new int[v];
+        for(int i=0;i<v;i++){
+            for(int nbrs:graph.get(i)){
+                indegree[nbrs]++;
+            }
+        }
+        
+        for(int i=0;i<v;i++){
+            if(indegree[i]==0){
+                q.addLast(i);
+            }
+        }
+            int ans=0;
+            
+            while(q.size()>0){
+                int rem = q.removeFirst();
+                idx++;
+                
+                for(int nbrs:graph.get(rem)){
+                    indegree[nbrs]--;
+                    if(indegree[nbrs]==0){
+                        q.addLast(nbrs);
+                    }
+                }
+                  
+            }
+            if(idx==v){
+                return true;
+            }
+            return false;        
+        
+        }
+        
+    
+}

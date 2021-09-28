@@ -1,0 +1,15 @@
+  static int tilt = 0;
+  public static int tilt(Node node){
+    if(node==null){
+        return 0;
+    }
+    int ls = tilt(node.left);
+    // this will return left's sum and change tilt
+    int rs = tilt(node.right);
+    //same
+    int ltilt = Math.abs(ls-rs);
+    tilt += ltilt ;
+    
+    int tsum = ls+rs+node.data;
+    return tsum;
+  }

@@ -1,0 +1,70 @@
+Add Node in BST
+
+ public static Node add(Node node, int data) {
+   if(node==null){
+       return new Node(data , null ,null);
+   }
+   if(node.data > data ){
+     node.left  =  add(node.left ,data);
+       
+   }
+   else if(node.data < data ){
+      node.right = add(node.right ,data);
+   }
+   
+   else{
+       
+   }
+   return node;
+   
+  }
+
+LARGEST BST SUBTREE
+
+
+static class Spair{
+    Node root;
+    int max ;
+    int min; 
+    int size; 
+    bbolean isT;
+} 
+public static Spair Lsub(Node node){
+    if(node==null){
+        Spair bp = new Spair();
+        bp.root = null;
+        bp.size=0;
+        bp.isB = true;
+        bp.min = Integer.MAX_VALUE;
+        bp.max = Integer.MIN_VALUE;
+        
+        return bp;
+    }
+    
+    Spair lp = Lsub(node.left); // max, min, root, isB ,size
+    Spair rp=Lsub(node.right);
+    
+    Spair mp=new Spair();
+    mp.max = Math.max(node.data , Math.max(lp.max , rp.max));
+    mp.min = Math.min(node.data , Math.min(lp.min , rp.min));
+    
+    mp.isB = lp.isB && rp.isB && node.data>lp.max && node.data < rp.min;
+    
+    if(mp.isB){
+        mp.root = node;
+        mp.size = lp.size + rp.size + 1;
+        
+    }else if(lp.size > rp.size){
+        mp.root = lp.root;
+        mp.size = lp.size;
+        
+    }else{
+        mp.root=rp.root;
+        mp.size = rp.size;
+    }
+    return mp;
+}
+
+
+
+
