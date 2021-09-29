@@ -1,0 +1,68 @@
+//Union of two sorted arrays
+
+class Solution
+{
+    //Function to return a list containing the union of the two arrays.
+    public static ArrayList<Integer> findUnion(int arr1[], int arr2[], int n, int m)
+    {
+     ArrayList<Integer> al=new ArrayList<>();
+   
+      int i=0;
+      int j=0;
+      while(i<n && j<m){
+          if(arr1[i]>arr2[j]){
+              if(al.size()>0 && al.get(al.size()-1)!=arr2[j]){
+              al.add(arr2[j]);
+              }else if(al.size()==0){
+                  al.add(arr2[j]);
+              }
+              j++;
+              
+          }else if(arr1[i]<arr2[j]){
+               if(al.size()>0 && al.get(al.size()-1)!=arr1[i]){
+              al.add(arr1[i]);
+               }else if(al.size()==0){
+                  al.add(arr1[i]);
+              }
+              i++;
+            
+          }
+          else{
+               if(al.size()>0 && al.get(al.size()-1)!=arr2[j]){
+              al.add(arr1[i]);
+               }
+               else if(al.size()==0){
+                  al.add(arr2[j]);
+              }
+              i++;
+              j++;
+              
+          }
+      }
+      
+    
+          while(i<n){
+              if(al.size()>0 && al.get(al.size()-1)!=arr1[i]){
+              al.add(arr1[i]);
+              }else if(al.size()==0){
+                  al.add(arr2[j]);
+              }
+              i++;
+          }
+      
+       
+     
+          while(j<m){
+                   if(al.size()>0 && al.get(al.size()-1)!=arr2[j]){
+              al.add(arr2[j]);
+                   }else if(al.size()==0){
+                  al.add(arr2[j]);
+              }
+              j++;
+          }
+     
+      return al;
+
+    }
+}
+
