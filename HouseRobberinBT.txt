@@ -1,0 +1,35 @@
+HOUSE ROBBER IN BINARY TREE
+
+ public static class housePair{
+      int withrobbery=0;
+      int withoutrobbery=0;
+  }
+  
+  
+    public static housePair HouseRobber_(TreeNode root) {
+        
+        if(root==null)
+        return new housePair();
+        //Asking left child the amount , with and without robbery 
+        housePair left =  HouseRobber_(root.left);
+        
+         //Asking left child the amount , with and without robbery 
+        housePair right =  HouseRobber_(root.right);
+        
+        housePair mp=new housePair();
+        
+        mp.withrobbery = left.withoutrobbery + right.withoutrobbery + root.val ;
+        
+        mp.withoutrobbery = Math.max(left.withrobbery ,left.withoutrobbery) + Math.max(right.withrobbery ,right.withoutrobbery);
+        
+        
+        return mp;
+        
+    }
+    public static int HouseRobber(TreeNode root) {
+        
+        housePair res = HouseRobber_(root);
+        
+        return Math.max(res.withrobbery , res.withoutrobbery);
+        
+    }
