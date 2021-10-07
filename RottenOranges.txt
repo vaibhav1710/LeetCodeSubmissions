@@ -1,0 +1,46 @@
+
+  public static int orangesRotting(int[][] grid) {
+    
+    LinkedList<Pair> q=new LinkedList<>();
+    int fresh=0;
+    for(int i=0;i<grid.length;i++){
+        for(int j=0;j<grid[0].length;j++){
+            if(grid[i][j]==2){
+                q.addLast(new Pair(i,j));
+            }else if(grid[i][j]==1){
+                fresh++;
+            }
+        }
+    }
+    int level=-1;
+    while(q.size()>0){
+        int size = q.size();
+        level++;
+        while(size-- > 0){
+            Pair rem = q.removeFirst();
+            
+            int dirs[][] = {{0,1},{1,0},{-1,0},{0,-1}};
+            for(int i=0;i<dirs.length;i++){
+                int rdash = rem.row + dirs[i][0];
+                int cdash = rem.col + dirs[i][1];
+                
+                if(rdash>=0 && cdash >= 0 && rdash < grid.length && cdash < grid[0].length && grid[rdash][cdash]==1){
+                   q.addLast(new Pair(rdash , cdash));
+                   fresh--;
+                   grid[rdash][cdash]=0;
+                }
+            }
+        }
+    }
+    
+    
+    
+    if(fresh==0){
+       return level;
+    }
+    else{
+    return -1;
+    }
+   
+    }
+    
