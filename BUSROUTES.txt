@@ -11,7 +11,7 @@ class Main {
         
          for(int j=0;j<routes[i].length;j++){
        int  busstopno = routes[i][j];
-         ArrayList<Integer> cbuses = hm.getOrDefault(routes[i][j], new ArrayList<>());  //Storing the available bus from this stop
+         ArrayList<Integer> cbuses = hm.getOrDefault(routes[i][j], new ArrayList<>());  //Getting the previous filled Arraylist of this stop or creating a new one
          cbuses.add(i);                                                                 //Storing the available bus from this stop
          hm.put(routes[i][j] , cbuses);
              
