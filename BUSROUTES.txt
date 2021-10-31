@@ -1,0 +1,95 @@
+import java.io.*;
+import java.util.*;
+
+class Main {
+    
+    public static int numBusesToDestination(int[][] routes, int S, int T) {
+        
+     HashMap<Integer ,ArrayList<Integer> > hm = new HashMap<>(); //To store busstop and all the bus visiting their
+     
+     for(int i=0;i<routes.length;i++){
+        
+         for(int j=0;j<routes[i].length;j++){
+       int  busstopno = routes[i][j];
+         ArrayList<Integer> cbuses = hm.getOrDefault(routes[i][j], new ArrayList<>());  //Storing the available bus from this stop
+         cbuses.add(i);                                                                 //Storing the available bus from this stop
+         hm.put(routes[i][j] , cbuses);
+             
+         }
+     }
+     
+     
+     LinkedList<Integer> l = new LinkedList<>();     // Queue
+     HashSet<Integer> busstopvis = new HashSet<>();  // HashSet to mark busstop visited
+     HashSet<Integer> busnovis = new HashSet<>();   // HashSet to mark bus visited
+     
+     l.add(S);
+     int level = 0;
+     while(l.size()>0){
+         
+         int s = l.size();
+         
+         while(s-->0){
+             
+          int rem = l.remove();
+          if(rem == T){
+              return level;
+          }
+          
+          ArrayList<Integer> buses = hm.get(rem);  // Getting all the available bus from current stop
+          
+          for(int bus:buses){          // Picking one bus from all the available buses
+              
+              if(busnovis.contains(bus)){  
+                  continue;
+              }
+              
+              int [] arr = routes[bus];   //Adding all the visiting stop of the bus
+              
+              for(int busstop : arr){
+                  
+                  if(busstopvis.contains(busstop)){
+                      continue;
+                  }
+                  
+                  l.addLast(busstop);
+                  busstopvis.add(busstop);
+              }
+              
+              busnovis.add(bus);
+          }
+          
+         
+     }
+     
+     if(l.size()>0){
+         level++;
+     }
+     }
+     
+     return -1;
+  }
+  public static void main(String[] args) throws NumberFormatException, IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    int n = Integer.parseInt(br.readLine());
+    int m = Integer.parseInt(br.readLine());
+
+    int[][] arr = new int[n][m];
+
+    for (int i = 0; i < n; i++) {
+      String[] st = br.readLine().split(" ");
+      for (int j = 0; j < m; j++) {
+        arr[i][j] = Integer.parseInt(st[j]);
+      }
+    }
+
+    String[] st1 = br.readLine().split(" ");
+    int src = Integer.parseInt(st1[0]);
+    int dest = Integer.parseInt(st1[1]);
+    System.out.println(numBusesToDestination(arr, src, dest));
+
+  }
+
+  
+}
