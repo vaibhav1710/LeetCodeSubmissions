@@ -13,6 +13,11 @@
  *     }
  * }
  */
+
+  // The best learning was to know the conversion from binary to decimal , by multiplying by 2 to
+  // the parents value and adding the binary value of node.
+
+
 class Solution {
     public int sumRootToLeaf(TreeNode root) {
        
