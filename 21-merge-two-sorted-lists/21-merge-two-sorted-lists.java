@@ -10,62 +10,42 @@
  */
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+      
         if(list1==null && list2==null){
             return null;
         } 
         
-        ListNode head=null;
-        ListNode first = null;
-        ListNode second = null;
-         if(list1!=null && list2!=null){
-        if(list1.val>list2.val){
-            head = list2;
-             first = list1;
-            second = list2.next;
-        }else{
-            first = list1.next;
-            head = list1;
-            second = list2;
-        }
-         }else if(list1==null){
-             head = list2;
-             second = list2.next;
-         }else{
-             head=list1;
-             first = list1.next;
-         }
-        
-    
-        
-        
+       ListNode head = new ListNode(0);
         ListNode move = head;
         
-        while(first!=null || second!=null){
-            
-            if(first!=null && second!=null){
-                if(first.val>second.val){
-                    move.next = second;
-                    move = move.next;
-                    second = second.next;
-                }else{
-                      move.next = first;
-                    move = move.next;
-                    first = first.next;
-                }
-            }else if(first!=null){
-                  move.next = first;
-                    move = move.next;
-                    first = first.next;   
+        while(list1!=null && list2!=null){
+            if(list1.val>list2.val){
+                move.next = list2;
+                move = move.next;
+                list2 = list2.next;
+            }else if(list1.val<list2.val){
+                 move.next = list1;
+                move = move.next;
+                list1 = list1.next;
             }else{
-                 move.next = second;
-                    move = move.next;
-                    second = second.next;
+                 move.next = list2;
+                move = move.next;
+                list2 = list2.next;
+              
             }
-             
         }
         
-        return head;
+        while(list1!=null){
+             move.next = list1;
+                move = move.next;
+                list1 = list1.next;
+        }
+        while(list2!=null){
+             move.next = list2;
+                move = move.next;
+                list2 = list2.next;
+        }
         
-        
+        return head.next;
     }
 }
