@@ -6,12 +6,16 @@ class Solution {
             sum[nums[i]] += nums[i];
         }
 
-       int ans[] = new int[10001];
-      ans[0] = sum[0];
-      ans[1] = Math.max(sum[0],sum[1]);
-      for(int i=2;i<10001;i++){
-          ans[i] = Math.max( ans[i-1], ans[i-2]+sum[i]);
-      }
-      return ans[10000];
+       int ans[][] = new int[10001][2];
+      ans[1][0] = sum[1];
+       ans[1][1] = 0;
+       ans[2][0] = sum[2];
+       ans[2][1] = Math.max(ans[1][0],ans[1][1]);
+       for(int i=3;i<10001;i++){
+           ans[i][0] =  ans[i-1][1] + sum[i];
+           ans[i][1] = Math.max(ans[i-1][0],ans[i-1][1]);
+       }
+    
+      return Math.max(ans[10000][0],ans[10000][1]);
     }
 }
