@@ -1,4 +1,7 @@
 
+//O(1) memory solution , using floyd's cycle detection algo
+// recommened coding ninjas blog
+
 public class Solution {
     public ListNode detectCycle(ListNode head) {
         int count=1;
