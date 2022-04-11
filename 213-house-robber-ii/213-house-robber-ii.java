@@ -11,6 +11,8 @@ class Solution {
         ans[0][0] = nums[0];
         ans[0][1] = 0;
         int n = nums.length;
+            
+         // include first house and exclude the last one   
         for(int i=1;i<nums.length-1;i++){
             ans[i][0] = ans[i-1][1]+nums[i];
             ans[i][1] = Math.max(ans[i-1][0],ans[i-1][1]);
@@ -21,6 +23,9 @@ class Solution {
         ans = new int[n][2];
         ans[1][0] = nums[1];
         ans[1][1] = 0;
+            
+          // exclude first house and include the last one 
+            
          for(int i=2;i<nums.length;i++){
             ans[i][0] = ans[i-1][1]+nums[i];
             ans[i][1] = Math.max(ans[i-1][0],ans[i-1][1]);
