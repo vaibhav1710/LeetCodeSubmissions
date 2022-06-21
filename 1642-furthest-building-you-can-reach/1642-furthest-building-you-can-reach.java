@@ -15,13 +15,9 @@ class Solution {
                 }else{
                     return i-1;
                 }
-            }else{
-                    
-                } 
-            }else{
-                
             }
         }
+    }
         return heights.length-1;
     }
 }
