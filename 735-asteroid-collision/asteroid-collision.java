@@ -12,6 +12,7 @@ class Solution {
         
         for(int i=0;i<asteroids.length;i++){
             while(st.size()>0 && asteroids[i]<0 && asteroids[st.peek()]>0){
+                // peak wala right jaa rha.. aur curr left jaa rha...toh dekh lo kon bachega..us hisab se updt
                 int diff = asteroids[i] + asteroids[st.peek()];
                 if(diff>0){
                     asteroids[i]=0;
